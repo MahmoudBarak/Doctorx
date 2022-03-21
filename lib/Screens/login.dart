@@ -1,14 +1,10 @@
 
-import 'package:custom_clippers/Clippers/directional_wave_clipper.dart';
-import 'package:custom_clippers/Clippers/multiple_points_clipper.dart';
 import 'package:custom_clippers/Clippers/sin_cosine_wave_clipper.dart';
 import 'package:custom_clippers/enum/enums.dart';
-import 'package:doctorx/Screens/BottomNavigation.dart';
+import 'package:doctorx/Screens/HomeScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
-
 import 'SignUp.dart';
 
 class Login extends StatefulWidget {
@@ -48,8 +44,10 @@ class _LoginState extends State<Login> {
               ),
             ),
             SizedBox(
-              height: 100,
+              height:50,
             ),
+            Text('LOGIN',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+            SizedBox(height: 25,),
 
 
             Center(
@@ -60,18 +58,22 @@ class _LoginState extends State<Login> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextFormField(
+                      keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.next,
                       controller: _email,
                       validator: (email)=>email!.isEmpty?'Email Can\‘t  be Empty':null,
 
                       decoration: InputDecoration(
                           hintText: 'Email',
                           hintStyle: TextStyle(color: Colors.grey.shade400),
-                          border: const OutlineInputBorder()),
+                          border:OutlineInputBorder(borderRadius: BorderRadius.circular(29))),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     TextFormField(
+
+                      textInputAction: TextInputAction.done,
                       validator: (password)=>password!.isEmpty?'Password Can\‘t be Empty ':null,
                        obscureText: _vis ? false : true,
                       decoration: InputDecoration(
@@ -91,7 +93,7 @@ class _LoginState extends State<Login> {
                                 color: Colors.deepPurpleAccent,
                               )
                           ),
-                          border: const OutlineInputBorder(),
+                          border:OutlineInputBorder(borderRadius: BorderRadius.circular(29)),
                           hintText: "Password",
                           hintStyle: TextStyle(color: Colors.grey.shade400)),
                     ),
@@ -114,7 +116,7 @@ class _LoginState extends State<Login> {
                             if(_validateForm()){
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
-                                    builder: (_) =>BottomNavigationbar(),
+                                    builder: (_) =>HomeScreen(),
                                   ),
                                       (route) => false);
 

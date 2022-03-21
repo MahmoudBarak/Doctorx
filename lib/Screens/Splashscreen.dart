@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:wave/config.dart';
-import 'package:wave/wave.dart';
+import 'package:splash_screen_view/SplashScreenView.dart';
 
 import 'login.dart';
 
@@ -14,30 +12,20 @@ class SplachScreen extends StatefulWidget {
 
 class _SplachScreenState extends State<SplachScreen> {
   @override
-  void initState() {
-   Future.delayed(Duration(seconds: 10) ,(){
-    Navigator.of(context).pushAndRemoveUntil(
-    MaterialPageRoute(
-    builder: (_) =>Login(),
-    ),
-    (route) => false);
+ ////
 
-
-   });
-    super.initState();
-  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body:Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-
-            LoadingAnimationWidget.inkDrop(color: Colors.deepPurple, size: 20)
-          ],
-        ),
-      ) ,
-    );
+    return  SplashScreenView(
+      duration: 2000,
+      imageSize: 200,
+      imageSrc: 'assets/images/logo.png',
+      text: 'Medical Expert System',
+      textType: TextType.ScaleAnimatedText,
+      textStyle: TextStyle(fontWeight: FontWeight.bold),
+      backgroundColor: Colors.white,
+      navigateRoute: Login() ,
+    )
+    ;
   }
 }
