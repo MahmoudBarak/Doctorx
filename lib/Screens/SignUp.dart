@@ -1,4 +1,3 @@
-import 'package:custom_clippers/custom_clippers.dart';
 import 'package:doctorx/Screens/HomeScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -29,126 +28,122 @@ class _SignUpState extends State<SignUp> {
           child: SafeArea(
             child: Column(
               children: [
-                ClipPath(
-                  clipper: SinCosineWaveClipper(
-                      verticalPosition: VerticalPosition.BOTTOM,
-                      horizontalPosition: HorizontalPosition.LEFT),
-                  child: Container(
-                    child: Center(
-                        child: Text(
-                      'SIGNUP',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.white),
-                    )),
-                    height: 120,
-                    width: double.infinity,
-                    color: Colors.deepPurpleAccent,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(onPressed: (){
+                      Navigator.pop(context);
+                    }, icon: Icon(Icons.arrow_back_outlined)),
+                  ],
                 ),
-                Image.asset(
-                  'assets/images/robot-doctor.png',
-                  height: 150,
-                ),
-                Center(
-                    child: Container(
-                        width: 300,
-                        height: 500,
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TextFormField(
-                                controller:_userName ,
-                                 textInputAction: TextInputAction.next,
-                                validator: (firstname) => firstname!.isEmpty
-                                    ? 'UserName be Can\‘t embty'
-                                    : null,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(29)),
-                                  hintText: 'User Name',
-                                  hintStyle: TextStyle(color: Colors.black),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-
-                              TextFormField(
-                                keyboardType: TextInputType.emailAddress,
-                                textInputAction: TextInputAction.next,
-                                controller: _email,
-                                validator: (email) => email!.isEmpty
-                                    ? 'Email Can\‘t be Empty'
-                                    : null,
-                                decoration: InputDecoration(
-                                    hintText: 'Email',
-                                    hintStyle: TextStyle(color: Colors.black),
-                                    border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(29))),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              TextFormField(
-                                textInputAction: TextInputAction.done,
-                                validator: (password) => password!.isEmpty
-                                    ? 'Password Can\‘t be Empty '
-                                    : null,
-                                obscureText: _vis ? false : true,
-                                decoration: InputDecoration(
-                                    suffixIcon: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            _vis = !_vis;
-                                          });
-                                        },
-                                        icon: _vis
-                                            ? const Icon(
-                                                Icons.visibility,
-                                                color: Colors.deepPurpleAccent,
-                                              )
-                                            : const Icon(
-                                                Icons.visibility_off,
-                                                color: Colors.deepPurpleAccent,
-                                              )),
-                                    border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(29)),
-                                    hintText: "Password",
-                                    hintStyle: TextStyle(color: Colors.black)),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Colors.deepPurpleAccent),
-                                child: TextButton(
-                                  onPressed: () {
-                                    if (_validateForm()) {
-                                      Navigator.of(context).pushAndRemoveUntil(
-                                          MaterialPageRoute(
-                                            builder: (_) =>
-                                                HomeScreen(),
-                                          ),
-                                          (route) => false);
-                                    }
-                                  },
-                                  child: const Text(
-                                    'SIGN UP',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius: 60,
+                      backgroundImage: AssetImage('assets/images/logo.png'),
+                      backgroundColor: Colors.grey.shade200,
+                    ),
+                    Center(
+                        child: Container(
+                            width: 300,
+                            height: 500,
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  TextFormField(
+                                    controller:_userName ,
+                                     textInputAction: TextInputAction.next,
+                                    validator: (firstname) => firstname!.isEmpty
+                                        ? 'UserName be Can\‘t embty'
+                                        : null,
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(29)),
+                                      hintText: 'User Name',
+                                      hintStyle: TextStyle(color: Colors.black),
+                                    ),
                                   ),
-                                ),
-                              )
-                            ]))),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+
+                                  TextFormField(
+                                    keyboardType: TextInputType.emailAddress,
+                                    textInputAction: TextInputAction.next,
+                                    controller: _email,
+                                    validator: (email) => email!.isEmpty
+                                        ? 'Email Can\‘t be Empty'
+                                        : null,
+                                    decoration: InputDecoration(
+                                        hintText: 'Email',
+                                        hintStyle: TextStyle(color: Colors.black),
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(29))),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  TextFormField(
+                                    textInputAction: TextInputAction.done,
+                                    validator: (password) => password!.isEmpty
+                                        ? 'Password Can\‘t be Empty '
+                                        : null,
+                                    obscureText: _vis ? false : true,
+                                    decoration: InputDecoration(
+                                        suffixIcon: IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                _vis = !_vis;
+                                              });
+                                            },
+                                            icon: _vis
+                                                ? const Icon(
+                                                    Icons.visibility,
+                                                    color: Colors.deepPurpleAccent,
+                                                  )
+                                                : const Icon(
+                                                    Icons.visibility_off,
+                                                    color: Colors.deepPurpleAccent,
+                                                  )),
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(29)),
+                                        hintText: "Password",
+                                        hintStyle: TextStyle(color: Colors.black)),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Container(
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50),
+                                        color: Colors.deepPurpleAccent),
+                                    child: TextButton(
+                                      onPressed: () {
+                                        if (_validateForm()) {
+                                          Navigator.of(context).pushAndRemoveUntil(
+                                              MaterialPageRoute(
+                                                builder: (_) =>
+                                                    HomeScreen(),
+                                              ),
+                                              (route) => false);
+                                        }
+                                      },
+                                      child: const Text(
+                                        'SIGN UP',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  )
+                                ]))),
+                  ],
+                ),
               ],
             ),
           ),
