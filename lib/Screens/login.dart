@@ -30,137 +30,139 @@ class _LoginState extends State<Login> {
           key: _key,
           child: SafeArea(
       child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: SingleChildScrollView(
+          reverse: true,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
 
-            children: [
-              CircleAvatar(
-                radius: 60,
-                backgroundImage: AssetImage('assets/images/logo.png'),
-                backgroundColor: Colors.grey.shade200,
-              ),
-              SizedBox(height:100,),
+              children: [
+                CircleAvatar(
+                  radius: 60,
+                  backgroundImage: AssetImage('assets/images/logo.png'),
+                  backgroundColor: Colors.grey.shade200,
+                ),
+                SizedBox(height:100,),
 
-              Center(
-                child: Container(
-                  width: 300,
-                  height: 432,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextFormField(
-                        keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.next,
-                        controller: _email,
-                        validator: (email)=>email!.isEmpty?'Email Can\‘t  be Empty':null,
+                Center(
+                  child: Container(
+                    width: 300,
+                    height: 500,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextFormField(
+                          style:Theme.of(context).textTheme.bodyText1,
+                          keyboardType: TextInputType.emailAddress,
+                          textInputAction: TextInputAction.next,
+                          controller: _email,
+                          validator: (email)=>email!.isEmpty?'Email Can\‘t  be Empty':null,
 
-                        decoration: InputDecoration(
-                            hintText: 'Email',
-                            hintStyle: TextStyle(color: Colors.grey.shade400),
-                            border:OutlineInputBorder(borderRadius: BorderRadius.circular(29))),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
+                          decoration: InputDecoration(
+                              hintText: 'Email',
+                              hintStyle: TextStyle(color: Colors.grey.shade400),
+                              border:OutlineInputBorder(borderRadius: BorderRadius.circular(29))),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          style:Theme.of(context).textTheme.bodyText1,
 
-                        textInputAction: TextInputAction.done,
-                        validator: (password)=>password!.isEmpty?'Password Can\‘t be Empty ':null,
-                         obscureText: _vis ? false : true,
-                        decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _vis = !_vis;
-                                  });
-                                },
-                                icon: _vis
-                                    ? Icon(
-                                  Icons.visibility,
-                                  color: Colors.deepPurpleAccent,
-                                )
-                                    : Icon(
-                                  Icons.visibility_off,
-                                  color: Colors.deepPurpleAccent,
-                                )
-                            ),
-                            border:OutlineInputBorder(borderRadius: BorderRadius.circular(29)),
-                            hintText: "Password",
-                            hintStyle: TextStyle(color: Colors.grey.shade400)),
-                      ),
-                      Align(
-                          alignment: Alignment.bottomRight,
+                          textInputAction: TextInputAction.done,
+                          validator: (password)=>password!.isEmpty?'Password Can\‘t be Empty ':null,
+                           obscureText: _vis ? false : true,
+                          decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _vis = !_vis;
+                                    });
+                                  },
+                                  icon: _vis
+                                      ? Icon(
+                                    Icons.visibility,
+                                    color: Theme.of(context).primaryColor,
+                                  )
+                                      : Icon(
+                                    Icons.visibility_off,
+                                    color: Theme.of(context).primaryColor,
+                                  )
+                              ),
+                              border:OutlineInputBorder(borderRadius: BorderRadius.circular(29)),
+                              hintText: "Password",
+                              hintStyle: TextStyle(color: Colors.grey.shade400)),
+                        ),
+                        Align(
+                            alignment: Alignment.bottomRight,
+                            child: TextButton(
+                                onPressed: () {},
+                                child:  Text(
+                                  'ForgetPassword?',
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                ))),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(100),color: Theme.of(context).primaryColor),
                           child: TextButton(
-                              onPressed: () {},
-                              child: const Text(
-                                'ForgetPassword?',
-                                style: TextStyle(color: Colors.deepPurpleAccent),
-                              ))),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(100),color: Colors.deepPurpleAccent),
-                        child: TextButton(
-                            onPressed: () {
-                              if(_validateForm()){
-                                Navigator.of(context).pushAndRemoveUntil(
-                                    MaterialPageRoute(
-                                      builder: (_) =>HomeScreen(),
-                                    ),
-                                        (route) => false);
-
-
-                              }
-                            },
-                            child: const Text(
-                              'Login',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                  color: Colors.white),
-                            ),
-                            ),
-                      ),
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Divider(
-                            color: Colors.deepPurpleAccent,
-                            thickness: 10,
-                          ),
-                          Text('or'),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text('Don\‘t Have Account?'),
-                          TextButton(
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const SignUp()));
+                                if(_validateForm()){
+                                  Navigator.of(context).pushAndRemoveUntil(
+                                      MaterialPageRoute(
+                                        builder: (_) =>HomeScreen(),
+                                      ),
+                                          (route) => false);
+
+
+                                }
                               },
-                              child: const Text(
-                                'Register Now',
-                                style: TextStyle(color: Colors.deepPurpleAccent),
-                              ))
-                        ],
-                      )
-                    ],
+                              child:  Text(
+                                'Login',
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                              ),
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children:  [
+                            Divider(
+                              color: Colors.deepPurpleAccent,
+                              thickness: 10,
+                            ),
+                            Text('or',style:Theme.of(context).textTheme.bodyText1 ,),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Don\‘t Have Account?',style: Theme.of(context).textTheme.bodyText1,),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => const SignUp()));
+                                },
+                                child:  Text(
+                                  'Register Now',
+                                  style: TextStyle(color: Theme.of(context).primaryColor),
+                                ))
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+          ),
         ),
       ),
     ),

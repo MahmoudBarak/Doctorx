@@ -1,10 +1,12 @@
+import 'package:doctorx/Blocs/AppBloc/app_cubit.dart';
 import 'package:doctorx/Screens/boot_screen.dart';
+import 'package:doctorx/Screens/login.dart';
+import 'package:doctorx/Screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({
-    Key? key,
-  }) : super(key: key);
+  final String? userName;
+  const HomeScreen({Key? key, this.userName}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -36,7 +38,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-
       body: SafeArea(
         child: Center(
           child: Column(
@@ -70,9 +71,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         backgroundColor: Colors.grey.shade200,
                         radius: 60,
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Text(
-                        'Hi Mahmoud. I can \n help you uncover what \n may be causing your symptoms.\n Just click on start.',
+                        'Hi ${widget.userName}. I can \n help you uncover what \n may be causing your symptoms.\n Just click on start.',
                         style: Theme.of(context).textTheme.bodyText1,
                       )
                     ],
@@ -104,7 +107,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Text(
               'Medical Expert System',
-              style:TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.black),
             )
           ],
         ));
@@ -119,10 +125,11 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Dark Mode',
-                  style: Theme.of(context).textTheme.bodyText1),
+              Text('Dark Mode', style: Theme.of(context).textTheme.bodyText1),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    AppCubit.get(context).changeMode();
+                  },
                   icon: Icon(
                     Icons.brightness_2,
                     size: 30,
@@ -133,25 +140,55 @@ class _HomeScreenState extends State<HomeScreen> {
             thickness: 2,
           ),
           Row(
-
-            children:[
-              Icon(Icons.person,size: 30,) ,
-            Container(
-              width: 250,
-            child: TextButton(
-              style:ButtonStyle(alignment: Alignment.bottomLeft),
-              onPressed: () {},
-
-              child: Text(
-                'Profile',
-                style: Theme.of(context).textTheme.bodyText1,
+            children: [
+              Icon(
+                Icons.person,
+                size: 30,
               ),
-            ),
-          ),],),
-
+              Container(
+                width: 250,
+                child: TextButton(
+                  style: ButtonStyle(alignment: Alignment.bottomLeft),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Profile()));
+                  },
+                  child: Text(
+                    'Profile',
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ),
+              ),
+            ],
+          ),
           Divider(
             thickness: 2,
           ),
+          SizedBox(
+            height: 430,
+          ),
+          Row(
+            children: [
+              Icon(
+                Icons.logout,
+                size: 30,
+              ),
+              Container(
+                width: 250,
+                child: TextButton(
+                  style: ButtonStyle(alignment: Alignment.bottomLeft),
+                  onPressed: () {
+                    Navigator.of(context).pushAndRemoveUntil( MaterialPageRoute(builder: (context) => Login()), (route) => false);
+                  },
+                  child: Text(
+                    'Logout',
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ),
+              ),
+            ],
+          ),
+         
         ],
       ),
     );

@@ -52,6 +52,7 @@ class _SignUpState extends State<SignUp> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   TextFormField(
+                                    style:Theme.of(context).textTheme.bodyText1,
                                     controller:_userName ,
                                      textInputAction: TextInputAction.next,
                                     validator: (firstname) => firstname!.isEmpty
@@ -61,7 +62,7 @@ class _SignUpState extends State<SignUp> {
                                       border: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(29)),
                                       hintText: 'User Name',
-                                      hintStyle: TextStyle(color: Colors.black),
+                                      hintStyle: TextStyle(color: Colors.grey.shade400),
                                     ),
                                   ),
                                   const SizedBox(
@@ -69,6 +70,7 @@ class _SignUpState extends State<SignUp> {
                                   ),
 
                                   TextFormField(
+                                    style:Theme.of(context).textTheme.bodyText1,
                                     keyboardType: TextInputType.emailAddress,
                                     textInputAction: TextInputAction.next,
                                     controller: _email,
@@ -77,7 +79,7 @@ class _SignUpState extends State<SignUp> {
                                         : null,
                                     decoration: InputDecoration(
                                         hintText: 'Email',
-                                        hintStyle: TextStyle(color: Colors.black),
+                                        hintStyle: TextStyle(color:Colors.grey.shade400),
                                         border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(29))),
@@ -86,6 +88,7 @@ class _SignUpState extends State<SignUp> {
                                     height: 20,
                                   ),
                                   TextFormField(
+                                    style:Theme.of(context).textTheme.bodyText1,
                                     textInputAction: TextInputAction.done,
                                     validator: (password) => password!.isEmpty
                                         ? 'Password Can\‘t be Empty '
@@ -99,19 +102,19 @@ class _SignUpState extends State<SignUp> {
                                               });
                                             },
                                             icon: _vis
-                                                ? const Icon(
+                                                ?  Icon(
                                                     Icons.visibility,
-                                                    color: Colors.deepPurpleAccent,
+                                                    color: Theme.of(context).primaryColor,
                                                   )
-                                                : const Icon(
+                                                :  Icon(
                                                     Icons.visibility_off,
-                                                    color: Colors.deepPurpleAccent,
+                                                    color: Theme.of(context).primaryColor,
                                                   )),
                                         border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(29)),
                                         hintText: "Password",
-                                        hintStyle: TextStyle(color: Colors.black)),
+                                        hintStyle: TextStyle(color: Colors.grey.shade400)),
                                   ),
                                   const SizedBox(
                                     height: 20,
@@ -120,14 +123,14 @@ class _SignUpState extends State<SignUp> {
                                     width: double.infinity,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(50),
-                                        color: Colors.deepPurpleAccent),
+                                        color: Theme.of(context).primaryColor),
                                     child: TextButton(
                                       onPressed: () {
                                         if (_validateForm()) {
                                           Navigator.of(context).pushAndRemoveUntil(
                                               MaterialPageRoute(
                                                 builder: (_) =>
-                                                    HomeScreen(),
+                                                    HomeScreen(userName: _userName.text,),
                                               ),
                                               (route) => false);
                                         }

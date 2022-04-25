@@ -11,6 +11,15 @@ class Profile extends StatelessWidget {
           child: Column(
 
             children: [
+              Row(
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(Icons.arrow_back_outlined)),
+                ],
+              ),
 
           ],),
         ),
