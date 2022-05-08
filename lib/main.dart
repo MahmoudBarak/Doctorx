@@ -4,10 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'Screens/Splashscreen.dart';
-import 'network/dio_helper.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
-  DioHelper.init();
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp( MyApp());
 }
 
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-  create: (context) => AppCubit()..getQuestion(),
+  create: (context) => AppCubit(),
   child: BlocConsumer<AppCubit, AppState>(
     listener: (context, state) {},
   builder: (context, state) {

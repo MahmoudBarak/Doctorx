@@ -1,4 +1,5 @@
 import 'package:doctorx/Screens/HomeScreen.dart';
+import 'package:doctorx/firebases/Auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'SignUp.dart';
@@ -12,6 +13,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   TextEditingController _email = TextEditingController();
+  TextEditingController _password = TextEditingController();
 
   GlobalKey<FormState> _key = GlobalKey();
   bool _validateForm() {
@@ -66,6 +68,7 @@ class _LoginState extends State<Login> {
                           height: 20,
                         ),
                         TextFormField(
+                          controller: _password,
                           style:Theme.of(context).textTheme.bodyText1,
 
                           textInputAction: TextInputAction.done,
@@ -109,11 +112,16 @@ class _LoginState extends State<Login> {
                           child: TextButton(
                               onPressed: () {
                                 if(_validateForm()){
-                                  Navigator.of(context).pushAndRemoveUntil(
-                                      MaterialPageRoute(
-                                        builder: (_) =>HomeScreen(),
-                                      ),
-                                          (route) => false);
+
+                                    Navigator.of(context).pushAndRemoveUntil(
+                                        MaterialPageRoute(
+                                          builder: (_) =>HomeScreen(),
+                                        ),
+                                            (route) => false);
+
+
+
+
 
 
                                 }

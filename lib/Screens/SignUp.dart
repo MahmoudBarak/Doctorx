@@ -1,4 +1,5 @@
 import 'package:doctorx/Screens/HomeScreen.dart';
+import 'package:doctorx/firebases/Auth.dart';
 import 'package:flutter/material.dart';
 
 
@@ -12,6 +13,7 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   TextEditingController _email = TextEditingController();
   TextEditingController _userName = TextEditingController();
+  TextEditingController _password = TextEditingController();
   GlobalKey<FormState> _key = GlobalKey();
   bool _validateForm() {
     final formState = _key.currentState;
@@ -88,6 +90,7 @@ class _SignUpState extends State<SignUp> {
                                     height: 20,
                                   ),
                                   TextFormField(
+                                    controller: _password,
                                     style:Theme.of(context).textTheme.bodyText1,
                                     textInputAction: TextInputAction.done,
                                     validator: (password) => password!.isEmpty
@@ -133,6 +136,8 @@ class _SignUpState extends State<SignUp> {
                                                     HomeScreen(userName: _userName.text,),
                                               ),
                                               (route) => false);
+                                        }else{
+
                                         }
                                       },
                                       child: const Text(
