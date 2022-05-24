@@ -1,6 +1,5 @@
 import 'package:doctorx/Screens/HomeScreen.dart';
-import 'package:doctorx/firebases/Auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'SignUp.dart';
 
@@ -16,11 +15,28 @@ class _LoginState extends State<Login> {
   TextEditingController _password = TextEditingController();
 
   GlobalKey<FormState> _key = GlobalKey();
-  bool _validateForm() {
-    final formState = _key.currentState;
-    return formState!.validate() ? true : false;
-  }
   bool _vis = false;
+  void signInWithEmail(String email, String password,)async{
+    if(_key.currentState!.validate()){
+      await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password).
+      then((uId) => {
+      Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(
+      builder: (_) =>HomeScreen(),
+      ),
+      (route) => false)
+
+      }
+      ).catchError((e){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(e!.toString()),
+          backgroundColor: Colors.red,
+        ));
+      });
+    }
+  }
+
+
 
   @override
 
@@ -72,7 +88,14 @@ class _LoginState extends State<Login> {
                           style:Theme.of(context).textTheme.bodyText1,
 
                           textInputAction: TextInputAction.done,
-                          validator: (password)=>password!.isEmpty?'Password Can\‘t be Empty ':null,
+                          validator: (password){
+                            if(password!.isEmpty){
+                              return 'Password Can\‘t be Empty';
+                            }if(password.length<6){
+                              return "'Password Can\‘t be less Than 6";
+                            }
+                            return null;
+                          },
                            obscureText: _vis ? false : true,
                           decoration: InputDecoration(
                               suffixIcon: IconButton(
@@ -98,7 +121,8 @@ class _LoginState extends State<Login> {
                         Align(
                             alignment: Alignment.bottomRight,
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                },
                                 child:  Text(
                                   'ForgetPassword?',
                                   style: Theme.of(context).textTheme.bodyText1,
@@ -111,21 +135,8 @@ class _LoginState extends State<Login> {
                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(100),color: Theme.of(context).primaryColor),
                           child: TextButton(
                               onPressed: () {
-                                if(_validateForm()){
-
-                                    Navigator.of(context).pushAndRemoveUntil(
-                                        MaterialPageRoute(
-                                          builder: (_) =>HomeScreen(),
-                                        ),
-                                            (route) => false);
-
-
-
-
-
-
-                                }
-                              },
+                                signInWithEmail(_email.text, _password.text);
+                                },
                               child:  Text(
                                 'Login',
                                 style: Theme.of(context).textTheme.bodyText1,

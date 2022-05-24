@@ -2,7 +2,6 @@ import 'package:doctorx/Screens/HomeScreen.dart';
 import 'package:doctorx/firebases/Auth.dart';
 import 'package:flutter/material.dart';
 
-
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -33,9 +32,11 @@ class _SignUpState extends State<SignUp> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    IconButton(onPressed: (){
-                      Navigator.pop(context);
-                    }, icon: Icon(Icons.arrow_back_outlined)),
+                    IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(Icons.arrow_back_outlined)),
                   ],
                 ),
                 Column(
@@ -54,25 +55,28 @@ class _SignUpState extends State<SignUp> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   TextFormField(
-                                    style:Theme.of(context).textTheme.bodyText1,
-                                    controller:_userName ,
-                                     textInputAction: TextInputAction.next,
+                                    style:
+                                        Theme.of(context).textTheme.bodyText1,
+                                    controller: _userName,
+                                    textInputAction: TextInputAction.next,
                                     validator: (firstname) => firstname!.isEmpty
                                         ? 'UserName be Can\‘t embty'
                                         : null,
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(29)),
+                                          borderRadius:
+                                              BorderRadius.circular(29)),
                                       hintText: 'User Name',
-                                      hintStyle: TextStyle(color: Colors.grey.shade400),
+                                      hintStyle: TextStyle(
+                                          color: Colors.grey.shade400),
                                     ),
                                   ),
                                   const SizedBox(
                                     height: 20,
                                   ),
-
                                   TextFormField(
-                                    style:Theme.of(context).textTheme.bodyText1,
+                                    style:
+                                        Theme.of(context).textTheme.bodyText1,
                                     keyboardType: TextInputType.emailAddress,
                                     textInputAction: TextInputAction.next,
                                     controller: _email,
@@ -81,7 +85,8 @@ class _SignUpState extends State<SignUp> {
                                         : null,
                                     decoration: InputDecoration(
                                         hintText: 'Email',
-                                        hintStyle: TextStyle(color:Colors.grey.shade400),
+                                        hintStyle: TextStyle(
+                                            color: Colors.grey.shade400),
                                         border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(29))),
@@ -91,11 +96,17 @@ class _SignUpState extends State<SignUp> {
                                   ),
                                   TextFormField(
                                     controller: _password,
-                                    style:Theme.of(context).textTheme.bodyText1,
+                                    style:
+                                        Theme.of(context).textTheme.bodyText1,
                                     textInputAction: TextInputAction.done,
-                                    validator: (password) => password!.isEmpty
-                                        ? 'Password Can\‘t be Empty '
-                                        : null,
+                                    validator: (password) {
+                                      if(password!.isEmpty){
+                                        return 'Password Can\‘t be Empty';
+                                      }if(password.length>6){
+                                        return "'Password Can\‘t be less Than 6";
+                                      }
+                                            return null;
+                                    },
                                     obscureText: _vis ? false : true,
                                     decoration: InputDecoration(
                                         suffixIcon: IconButton(
@@ -105,19 +116,22 @@ class _SignUpState extends State<SignUp> {
                                               });
                                             },
                                             icon: _vis
-                                                ?  Icon(
+                                                ? Icon(
                                                     Icons.visibility,
-                                                    color: Theme.of(context).primaryColor,
+                                                    color: Theme.of(context)
+                                                        .primaryColor,
                                                   )
-                                                :  Icon(
+                                                : Icon(
                                                     Icons.visibility_off,
-                                                    color: Theme.of(context).primaryColor,
+                                                    color: Theme.of(context)
+                                                        .primaryColor,
                                                   )),
                                         border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(29)),
                                         hintText: "Password",
-                                        hintStyle: TextStyle(color: Colors.grey.shade400)),
+                                        hintStyle: TextStyle(
+                                            color: Colors.grey.shade400)),
                                   ),
                                   const SizedBox(
                                     height: 20,
@@ -130,15 +144,20 @@ class _SignUpState extends State<SignUp> {
                                     child: TextButton(
                                       onPressed: () {
                                         if (_validateForm()) {
-                                          Navigator.of(context).pushAndRemoveUntil(
-                                              MaterialPageRoute(
-                                                builder: (_) =>
-                                                    HomeScreen(userName: _userName.text,),
-                                              ),
-                                              (route) => false);
-                                        }else{
-
-                                        }
+                                          final email = _email.text;
+                                          final password = _password.text;
+                                          final name = _userName.text;
+                                          AuthServices().registerWithEmail(
+                                              email, password, name);
+                                          Navigator.of(context)
+                                              .pushAndRemoveUntil(
+                                                  MaterialPageRoute(
+                                                    builder: (_) => HomeScreen(
+                                                      userName: _userName.text,
+                                                    ),
+                                                  ),
+                                                  (route) => false);
+                                        } else {}
                                       },
                                       child: const Text(
                                         'SIGN UP',
@@ -150,6 +169,18 @@ class _SignUpState extends State<SignUp> {
                                     ),
                                   )
                                 ]))),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    InkWell(
+                      child: CircleAvatar(
+                        backgroundImage:
+                            AssetImage('assets/images/3d-fluency-google.png'),
+                        radius: 30,
+                        backgroundColor: Colors.white,
+                      ),
+                      onTap: () {},
+                    )
                   ],
                 ),
               ],
