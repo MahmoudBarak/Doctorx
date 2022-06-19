@@ -50,7 +50,7 @@ class _SignUpState extends State<SignUp> {
                     Center(
                         child: Container(
                             width: 300,
-                            height: 500,
+                            height: 400,
                             child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -102,7 +102,7 @@ class _SignUpState extends State<SignUp> {
                                     validator: (password) {
                                       if(password!.isEmpty){
                                         return 'Password Can\‘t be Empty';
-                                      }if(password.length>6){
+                                      }if(password.length<6){
                                         return "'Password Can\‘t be less Than 6";
                                       }
                                             return null;
@@ -147,8 +147,7 @@ class _SignUpState extends State<SignUp> {
                                           final email = _email.text;
                                           final password = _password.text;
                                           final name = _userName.text;
-                                          AuthServices().registerWithEmail(
-                                              email, password, name);
+                                          AuthServices().registerWithEmail(email, password, name);
                                           Navigator.of(context)
                                               .pushAndRemoveUntil(
                                                   MaterialPageRoute(

@@ -4,12 +4,25 @@ class QuestionModel {
   QuestionModel(
       {required this.message,
       });
-  factory QuestionModel.tojson(Map<String, dynamic> json) {
-    return QuestionModel(
-        message: 'message'
 
+  Map<dynamic, dynamic>tojson()=> {
+
+        "message": message
+
+  };
+
+}
+class AnswerModel{
+
+  List<dynamic> answer;
+  AnswerModel({
+    required this.answer
+});
+  factory AnswerModel.fromJson(Map<dynamic, dynamic> json){
+    return AnswerModel(
+      answer:json["answer"],
     );
-
   }
+
 
 }

@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:doctorx/Blocs/AppBloc/app_cubit.dart';
 import 'package:doctorx/Screens/boot_screen.dart';
 import 'package:doctorx/Screens/login.dart';
@@ -6,7 +5,6 @@ import 'package:doctorx/Screens/profile_screen.dart';
 import 'package:doctorx/network/dio_helper.dart';
 import 'package:flutter/material.dart';
 
-import '../model/OuestionModel.dart';
 
 class HomeScreen extends StatefulWidget {
   final String? userName;
@@ -20,25 +18,17 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
-  final String url="http://127.0.0.1:45494/predict";
-  dynamic ml={
-    "message":"hi"
 
-  };
 
-  Future<QuestionModel> messagePost() async{
-    Response response=  await Dio().post(url,data:ml  );
-    return(response.data);
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _globalKey,
       floatingActionButton: FloatingActionButton(
         onPressed: () async{
-          await  messagePost().then((value) => {
-            print(value)
-          });
+
+
 
 
           Navigator.push(
